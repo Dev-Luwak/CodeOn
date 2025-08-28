@@ -2,7 +2,10 @@ import { Card } from "./ui/Card";
 
 export default function Features() {
   return (
-    <section className="px-6 py-20 shadow-lg shadow-black/30">
+    <section
+      className="px-6 py-20 shadow-lg shadow-black/30"
+      data-aos="fade-up"
+    >
       <h2 className="text-3xl font-bold text-center mb-12">Why CodeOn?</h2>
       <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <Card>

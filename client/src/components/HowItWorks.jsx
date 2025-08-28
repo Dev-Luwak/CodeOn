@@ -23,14 +23,17 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="px-6 py-20 shadow-lg shadow-black/30">
+    <section
+      className="px-6 py-20 shadow-lg shadow-black/30"
+      data-aos="fade-up"
+    >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
         <ol className="flex flex-col items-center space-y-8">
           {steps.map((item) => (
             <li
               key={item.step}
-              className="flex flex-row items-center bg-zinc-900 bg-opacity-80 rounded-xl px-8 py-6 shadow-md w-full max-w-xl"
+              className="flex flex-row items-center bg-zinc-900 bg-opacity-80 rounded-xl px-8 py-6 shadow-md w-full max-w-xl transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-zinc-800"
             >
               {/* Left: Number */}
               <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-transparent">

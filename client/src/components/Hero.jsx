@@ -4,6 +4,7 @@ export default function HeroSection() {
   const full = "CodeOn./";
   const [text, setText] = React.useState("");
   const [done, setDone] = React.useState(false);
+  const [showDescription, setShowDescription] = React.useState(false);
 
   React.useEffect(() => {
     let i = 0;
@@ -13,6 +14,7 @@ export default function HeroSection() {
       if (i === full.length) {
         clearInterval(id);
         setDone(true);
+        setTimeout(() => setShowDescription(true), 500); // Delay for description animation
       }
     }, 80);
     return () => clearInterval(id);
@@ -49,7 +51,13 @@ export default function HeroSection() {
               />
             </div>
             {/* Subtle one-liner description */}
-            <p className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl font-medium text-[#E2E2E2]">
+            <p
+              className={`mx-auto max-w-2xl text-base sm:text-lg md:text-xl font-medium text-[#E2E2E2] transition-all duration-700 transform ${
+                showDescription
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-6"
+              }`}
+            >
               Learn. Code. Conquer. Instantly code along with expert-led
               tutorials & real-time practice.
             </p>
