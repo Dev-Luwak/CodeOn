@@ -7,7 +7,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-gradient-to-r from-[#3E8EFF] via-[#FE6CBB] to-[#A06AFE] text-white",
+        primary:
+          "bg-gradient-to-r from-[#3E8EFF] via-[#7565FE] to-[#A06AFE] text-white",
         outline: "border-gradient",
         ghost: "bg-transparent text-white/90 hover:text-white hover:bg-white/5",
       },
@@ -26,8 +27,13 @@ export function Button({ className, variant, size, asChild, ...props }) {
   const classes = twMerge(clsx(buttonVariants({ variant, size }), className));
   if (variant === "outline") {
     return (
-      <Comp className={twMerge("rounded-lg p-[1px] shadow-glow", className)} {...props}>
-        <span className="block rounded-lg bg-[#111113] px-4 py-2">{props.children}</span>
+      <Comp
+        className={twMerge("rounded-lg p-[1px] shadow-glow", className)}
+        {...props}
+      >
+        <span className="block rounded-lg bg-[#111113] px-4 py-2">
+          {props.children}
+        </span>
       </Comp>
     );
   }
