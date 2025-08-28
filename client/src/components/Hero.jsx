@@ -19,7 +19,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative bg-zinc-950">
+    <section className="relative shadow-lg shadow-black/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="h-[calc(100vh-4rem)] flex items-center justify-center text-center">
           <div className="space-y-6">

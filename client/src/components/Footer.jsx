@@ -6,7 +6,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="px-6 py-8 bg-black text-zinc-400 text-center text-sm mt-auto">
+    <footer className="px-6 py-8 bg-black text-zinc-400 text-center text-sm mt-auto shadow-lg shadow-black/30">
       <div className="mb-2">Made with ❤️ by CodeOn</div>
       <div className="flex justify-center gap-4">
         {socialLinks.map((link) => (
