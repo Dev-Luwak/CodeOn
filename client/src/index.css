@@ -6,7 +6,9 @@
   color-scheme: dark;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -20,25 +22,37 @@ body {
 }
 .border-gradient::before {
   content: "";
-  position: absolute; inset: -1px;
+  position: absolute;
+  inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(90deg, #3E8EFF 0%, #FE6CBB 50%, #A06AFE 100%);
+  background: linear-gradient(90deg, #3e8eff 0%, #fe6cbb 50%, #a06afe 100%);
   z-index: 0;
 }
 .border-gradient > * {
-  position: relative; z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 .text-gradient {
-  background: linear-gradient(90deg, #3E8EFF 0%, #FE6CBB 50%, #A06AFE 100%);
+  background: linear-gradient(90deg, #3e8eff 0%, #fe6cbb 50%, #a06afe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .focus-ring-gradient:focus-visible {
   outline: 2px solid transparent;
-  box-shadow:
-    0 0 0 2px #111113,
-    0 0 0 4px rgba(62,142,255,0.9),
-    0 0 0 6px rgba(254,108,187,0.8),
-    0 0 0 8px rgba(160,106,254,0.7);
+  box-shadow: 0 0 0 2px #111113, 0 0 0 4px rgba(62, 142, 255, 0.9),
+    0 0 0 6px rgba(254, 108, 187, 0.8), 0 0 0 8px rgba(160, 106, 254, 0.7);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
 }
