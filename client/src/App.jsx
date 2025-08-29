@@ -1,66 +1,77 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Landing from "./pages/Landing";
-// TODO: import Login, Register, Dashboard, etc.
-
-function Login() {
-  return (
-    <div className="min-h-screen grid place-items-center p-6">
-      <div className="w-full max-w-sm border-gradient rounded-2xl">
-        <div className="rounded-2xl bg-[#18181B] p-6 space-y-4">
-          <h2 className="text-xl font-bold">Login</h2>
-          <form className="space-y-3">
-            <input
-              className="w-full rounded-lg bg-black/50 border border-white/10 px-3 py-2"
-              placeholder="Email"
-              type="email"
-            />
-            <input
-              className="w-full rounded-lg bg-black/50 border border-white/10 px-3 py-2"
-              placeholder="Password"
-              type="password"
-            />
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-gradient-to-r from-brand-start via-brand-mid to-brand-end py-2 font-medium"
-            >
-              Sign in
-            </button>
-          </form>
-          <a className="text-sm text-zinc-400 hover:underline" href="#">
-            Forgot password?
-          </a>
-          <a
-            className="block text-center rounded-lg border border-white/10 py-2"
-            href={`${
-              import.meta.env.VITE_API_URL || "http://localhost:4000"
-            }/api/auth/google`}
-          >
-            Continue with Google
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { AuthProvider } from "./context/AuthContext";
+import { RequireAuth, RedirectIfAuthed } from "./routes/guards";
+import Login from "./pages/Login"; // Use Login.jsx directly
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<div>Login Page</div>} />
-          <Route path="/register" element={<div>Register Page</div>} />
-          <Route path="/dashboard" element={<div>Dashboard Page</div>} />
-          <Route path="/paths" element={<div>Paths Page</div>} />
-          <Route path="/settings" element={<div>Settings Page</div>} />
-        </Route>
-        {/* Workspace without NavBar */}
-        <Route path="/project/:id" element={<div>Workspace Page</div>} />
+  const [showModal, setShowModal] = useState(false); // State to control the modal
 
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Routes that render with NavBar */}
+          <Route
+            element={
+              <MainLayout onLoginClick={() => setShowModal(true)} /> // Pass setShowModal to MainLayout
+            }
+          >
+            <Route path="/" element={<Landing />} />
+
+            <Route
+              path="/login"
+              element={
+                <RedirectIfAuthed>
+                  <Login /> {/* Use Login.jsx for the standalone page */}
+                </RedirectIfAuthed>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <RedirectIfAuthed>
+                  <div>Register Page</div>
+                </RedirectIfAuthed>
+              }
+            />
+
+            <Route
+              path="/dashboard"
+              element={
+                <RequireAuth>
+                  <div>Dashboard Page</div>
+                </RequireAuth>
+              }
+            />
+
+            <Route path="/paths" element={<div>Paths Page</div>} />
+            <Route path="/settings" element={<div>Settings Page</div>} />
+          </Route>
+
+          {/* Workspace without NavBar */}
+          <Route path="/project/:id" element={<div>Workspace Page</div>} />
+
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+
+        {/* Login Modal */}
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+            <div className="w-full max-w-md">
+              <Login /> {/* Use Login.jsx for the modal */}
+            </div>
+            <button
+              className="absolute top-4 right-4 text-white text-2xl"
+              onClick={() => setShowModal(false)}
+            >
+              &times;
+            </button>
+          </div>
+        )}
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

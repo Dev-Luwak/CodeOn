@@ -1,14 +1,13 @@
-import NavBar from "../components/NavBar";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
-export default function MainLayout() {
-  const { pathname } = useLocation();
-  const hideNav = pathname.startsWith("/project/"); // hide for workspace
-
+export default function MainLayout({ onLoginClick }) {
   return (
-    <div className="flex flex-col min-h-screen bg-[#111113] text-white">
-      {!hideNav && <NavBar />}
-      <Outlet />
+    <div>
+      <Navbar onLoginClick={onLoginClick} /> {/* Pass onLoginClick to Navbar */}
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

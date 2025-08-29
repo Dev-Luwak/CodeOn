@@ -2,8 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "./ui/Button";
 
-export default function NavBar() {
-  // TODO: Replace with auth context (from React Query / Zustand)
+export default function NavBar({ onLoginClick }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const navLinks = [
@@ -48,11 +47,9 @@ export default function NavBar() {
         <div className="flex items-center gap-3">
           {!loggedIn ? (
             <>
-              <Link to="/login">
-                <Button variant="outline" size="sm">
-                  Login
-                </Button>
-              </Link>
+              <Button variant="outline" size="sm" onClick={onLoginClick}>
+                Login
+              </Button>
               <Link to="/register">
                 <Button variant="primary" size="sm">
                   Sign Up
