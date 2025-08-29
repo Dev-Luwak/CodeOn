@@ -4,7 +4,8 @@ import MainLayout from "./layouts/MainLayout";
 import Landing from "./pages/Landing";
 import { AuthProvider } from "./context/AuthContext";
 import { RequireAuth, RedirectIfAuthed } from "./routes/guards";
-import Login from "./pages/Login"; // Use Login.jsx directly
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false); // State to control the modal
@@ -33,7 +34,7 @@ export default function App() {
               path="/register"
               element={
                 <RedirectIfAuthed>
-                  <div>Register Page</div>
+                  <Register />
                 </RedirectIfAuthed>
               }
             />

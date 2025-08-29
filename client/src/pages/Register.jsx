@@ -15,7 +15,7 @@ export default function Register() {
   };
 
   return (
-    <AuthModal title="Create your account">
+    <AuthModal title="Create your account" standalone>
       <form onSubmit={onSubmit} className="space-y-3">
         <input
           className="w-full rounded-lg bg-black/50 border border-white/10 px-3 py-2"
